@@ -1,0 +1,16 @@
+const express=require("express")
+const app=express()
+const dotenv=require("dotenv").config()
+const cors=require("cors")
+const connectDB=require("./config/db")
+const adminRoutes = require("./routes/adminRoutes")
+const applicantRoutes = require("./routes/applicantRoutes")
+app.use(express.json())
+app.use(cors())
+app.use("/",adminRoutes)
+app.use("/",applicantRoutes)
+connectDB() 
+
+const server=app.listen(process.env.PORT,()=>{
+    console.log(`Server Running at Port ${process.env.PORT}`)
+}) 
